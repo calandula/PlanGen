@@ -90,7 +90,7 @@ if __name__ == '__main__':
     else:
         model_ckpt = torch.load(args.pretrained_ckpt_path, map_location='cpu')
     model_parameters = model_ckpt['model']
-    model.load_state_dict(model_parameters)
+    model.load_state_dict(model_parameters, strict=False)
     if torch.cuda.is_available():
         model = model.cuda(device)
     model.eval()

@@ -6,7 +6,7 @@ import json
 from torch.nn.utils import rnn
 import progressbar
 from transformers import BartTokenizer, BartTokenizerFast, BartConfig
-from transformers.modeling_bart import shift_tokens_right
+from transformers.models.bart.modeling_bart import shift_tokens_right
 from data_utlis import load_ordered_cell_list
 
 UNSEEN_SLOT_KEY, EOS, SEP = '__None__', '__EOS__', '__SEP__'
@@ -153,7 +153,7 @@ class Data:
         batch_tgt_tensor = [torch.LongTensor(item) for item in batch_tgt_id_list]
         batch_tgt_tensor = rnn.pad_sequence(batch_tgt_tensor, batch_first=True, padding_value=self.tokenizer.pad_token_id)
         batch_labels = batch_tgt_tensor
-        batch_input = shift_tokens_right(batch_labels, self.tokenizer.pad_token_id)
+        batch_input = shift_tokens_right(batch_labels, self.tokenizer.pad_token_id, decoder_start_token_id=self.bos_token_id)
         batch_labels[batch_labels[:, :] == self.tokenizer.pad_token_id] = -100
         return batch_input, batch_labels 
 

@@ -40,7 +40,7 @@ def parse_config():
     parser.add_argument('--gpu_id', type=int, default=0)
     parser.add_argument('--total_steps', type=int, default=300000)
     parser.add_argument('--warmup_steps', type=int, default=2000)
-    parser.add_argument('--batch_size', type=int, default=24)
+    parser.add_argument('--batch_size', type=int, default=2)
     parser.add_argument('--learning_rate', type=float, default=2e-5)
     parser.add_argument('--print_every', type=int, default=200)
     parser.add_argument('--eval_every', type=int, default=2000)
